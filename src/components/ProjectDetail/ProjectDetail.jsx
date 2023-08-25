@@ -1,5 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { arrayMove } from '@dnd-kit/sortable';
+import React, { useEffect, useState } from 'react';
 import KabanContainer from '../KabanContainer/';
 
 function ProjectDetail() {
@@ -25,11 +24,6 @@ function ProjectDetail() {
     const [view, setView] = useState(0);
     const [columns, setColumns] = useState([]);
     const [tasks, setTasks] = useState([]);
-    const [activeColumn, setActiveColumn] = useState(null);
-    const [activeTask, setActiveTask] = useState(null);
-
-    // Sortable
-    const collumsId = useMemo(() => columns.map((col) => col.id), [columns]);
 
     // Call API
     useEffect(() => {
@@ -45,10 +39,6 @@ function ProjectDetail() {
             {
                 id: 'done',
                 title: 'Done',
-            },
-            {
-                id: 'need',
-                title: 'Need',
             },
         ];
         const defaultTasks = [
@@ -124,81 +114,11 @@ function ProjectDetail() {
     }, []);
 
     // Handel
-    const handelDragStart = (event) => {
-        // Collum
-        if (event.active.data.current?.type === 'Column') {
-            setActiveColumn(event.active.data.current.column);
-            return;
-        }
-        // Task
-        if (event.active.data.current?.type === 'Task') {
-            setActiveTask(event.active.data.current.task);
-            return;
-        }
-    };
-    const handelDragEnd = (event) => {
-        const { active, over } = event;
-        // Nếu thả ở phần tử không hợp lệ
-        if (!over) return;
-        // Nếu thả ở vị trí cũ
-        const activeColId = active.id;
-        const overColId = over.id;
-        if (activeColId === overColId) return;
-        // Trường hợp hợp lệ
-        setColumns((columns) => {
-            const activeIdx = columns.findIndex(
-                (col) => col.id === activeColId,
-            );
-            const overIdx = columns.findIndex((col) => col.id === overColId);
-            return arrayMove(columns, activeIdx, overIdx);
-        });
-    };
-    const handelDragOver = (event) => {
-        const { active, over } = event;
-        if (!over) return;
-
-        const activeId = active.id;
-        const overId = over.id;
-
-        if (activeId === overId) return;
-
-        const isActiveATask = active.data.current?.type === 'Task';
-        const isOverATask = over.data.current?.type === 'Task';
-
-        if (!isActiveATask) return;
-
-        // Im dropping a Task over another Task
-        if (isActiveATask && isOverATask) {
-            setTasks((tasks) => {
-                const activeIndex = tasks.findIndex((t) => t.id === activeId);
-                const overIndex = tasks.findIndex((t) => t.id === overId);
-
-                if (tasks[activeIndex].columnId != tasks[overIndex].columnId) {
-                    tasks[activeIndex].columnId = tasks[overIndex].columnId;
-                    return arrayMove(tasks, activeIndex, overIndex - 1);
-                }
-
-                return arrayMove(tasks, activeIndex, overIndex);
-            });
-        }
-
-        const isOverAColumn = over.data.current?.type === 'Column';
-
-        // Im dropping a Task over a column
-        if (isActiveATask && isOverAColumn) {
-            setTasks((tasks) => {
-                const activeIndex = tasks.findIndex((t) => t.id === activeId);
-                tasks[activeIndex].columnId = overId;
-                return arrayMove(tasks, activeIndex, activeIndex);
-            });
-        }
-    };
-
     const handelUpdateName = (id, value) => {
         console.log(id, value);
     };
     return (
-        <div className="flex-1">
+        <div className="flex-1 overflow-hidden">
             <header>
                 <div className="flex items-center justify-between p-4">
                     <div className="block">
@@ -306,16 +226,12 @@ function ProjectDetail() {
                     </button>
                 </div>
             </header>
-            <main className="px-4 max-w-[60vw] overflow-x-auto">
+            <main className="px-4 max-w-[78vw] overflow-x-auto">
                 <KabanContainer
-                    collumns={columns}
-                    collumsId={collumsId}
-                    activeColumn={activeColumn}
+                    columns={columns}
+                    setColumns={setColumns}
                     tasks={tasks}
-                    activeTask={activeTask}
-                    handelDragStart={handelDragStart}
-                    handelDragEnd={handelDragEnd}
-                    handelDragOver={handelDragOver}
+                    setTasks={setTasks}
                     handelUpdateName={handelUpdateName}
                 />
             </main>

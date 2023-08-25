@@ -14,3 +14,15 @@
         font-family: 'Poppins', sans-serif;
     }
 }
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-gray-300  rounded-none;
+}

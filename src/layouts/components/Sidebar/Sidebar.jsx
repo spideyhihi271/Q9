@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import configs from '../../../configs';
-// Assets
-import './Sidebar.scss';
+import logo from '../../../assets/images/logo.png';
 
 function Header() {
     const [darkMode, setDarkMode] = useState(false);
-    const [minSize, setMinSize] = useState(false);
     const navList = [
         {
             icon: <i className="fa-light fa-grid-2"></i>,
@@ -51,7 +51,6 @@ function Header() {
             notify: 0,
         },
     ];
-
     const handelDarkMode = (value) => {
         let documentPage = document.documentElement;
         if (value) {
@@ -67,63 +66,53 @@ function Header() {
     }, [darkMode]);
 
     return (
-        <div
-            className={`relative block w-52 h-full overflow-hidden py-1 dark:bg-black transition-all ${
-                minSize ? 'sidebar-wrapper-active' : ''
-            }`}
-        >
-            <Link className="flex items-center px-4 w-full h-16 border-b-[1px] dark:border-b-gray-800"></Link>
-            <nav className="block py-2 px-2">
-                {navList.map((item, idx) => (
-                    <NavLink
-                        to={item.link}
-                        key={idx}
-                        className="relative flex items-center px-4 h-12 text-xl text-slate-500 group rounded hover:bg-hoverLight dark:hover:bg-hoverDark transition-colors"
-                    >
-                        <div className="flex flex-1 items-center h-full">
-                            <span className="group-hover:text-light dark:group-hover:text-dark">
-                                {item.icon}
+        <div className="relative w-16 h-full dark:bg-black">
+            <div className="mx-auto px-2 w-14 h-14 border-b-[1px] dark:border-b-gray-700">
+                <Link className="w-full h-full">
+                    <img
+                        className="w-full h-full object-contain"
+                        src={logo}
+                        alt="logo"
+                    />
+                </Link>
+            </div>
+            <nav className="my-2">
+                {navList.map((nav, idx) => (
+                    <Tippy content={nav.title} placement="right">
+                        <NavLink className="relative flex items-center justify-center w-14 h-14 mx-auto rounded-lg group hover:bg-hoverLight dark:hover:bg-hoverDark  transition-all">
+                            <span className="text-xl text-gray-500 dark:text-white group-hover:text-light dark:group-hover:text-white">
+                                {nav.icon}
                             </span>
-                            <p
-                                className={`mx-4 text-sm overflow-hidden group-hover:text-light dark:group-hover:text-dark transition-all ${
-                                    minSize ? 'sidebar-label-active' : ''
-                                }`}
-                            >
-                                {item.title}
-                            </p>
-                        </div>
-                        {item.notify > 0 && (
-                            <p
-                                className={`flex items-center justify-center h-4 w-4 text-white text-xs rounded-full bg-red-500 ${
-                                    minSize ? 'sidebar-icon-active' : ''
-                                }`}
-                            >
-                                1
-                            </p>
-                        )}
-                    </NavLink>
+                            {nav.notify > 0 && (
+                                <span className="absolute top-[10%] right-[10%] flex items-center justify-center w-4 h-4 bg-red-500 text-white rounded-full border-2 border-white text-xs">
+                                    1
+                                </span>
+                            )}
+                        </NavLink>
+                    </Tippy>
                 ))}
             </nav>
-
-            <button
-                className={`absolute bottom-14 flex items-center w-full mx-6 text-xl text-slate-400  ${
-                    minSize ? 'sidebar-scale-active' : ''
-                }`}
-                onClick={() => setDarkMode(!darkMode)}
-            >
-                <i className="fa-thin fa-circle-half-stroke"></i>
-                <p className="mx-4 text-sm">Dark Mode</p>
-            </button>
-
-            <button
-                className={`absolute bottom-5 flex items-center w-full mx-6 text-xl text-slate-400  ${
-                    minSize ? 'sidebar-scale-active' : ''
-                }`}
-                onClick={() => setMinSize(!minSize)}
-            >
-                <i className="fa-light fa-arrow-right-from-bracket"></i>
-                <p className="mx-4 text-sm">Collapse</p>
-            </button>
+            <nav className="absolute left-0 bottom-4 w-full">
+                <div className="mx-auto w-9 h-9 rounded-full overflow-hidden">
+                    <Link className="w-full h-full">
+                        <img
+                            className="w-full h-full object-cover"
+                            src="https://thuthuatnhanh.com/wp-content/uploads/2022/12/hinh-anh-nguoi-dep-1.jpg"
+                            alt="logo"
+                        />
+                    </Link>
+                </div>
+                <div
+                    className="my-2 mx-auto flex items-center justify-center w-9 h-9 rounded-full border text-lg"
+                    onClick={() => setDarkMode(!darkMode)}
+                >
+                    {darkMode ? (
+                        <i className="fa-light fa-moon"></i>
+                    ) : (
+                        <i className="fa-light fa-sun"></i>
+                    )}
+                </div>
+            </nav>
         </div>
     );
 }

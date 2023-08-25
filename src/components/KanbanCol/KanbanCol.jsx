@@ -40,49 +40,42 @@ function KanbanCol({ column, tasks, handelUpdateName }) {
             <div
                 ref={setNodeRef}
                 style={style}
-                className="flex-shrink-0 mr-1 p-1 w-80 max-h-[69vh] overflow-y-auto opacity-50 border dark:border-gray-500"
-            ></div>
+                className="flex-shrink-0 flex items-center justify-center mr-2 p-2 w-80 min-h-[100px] bg-white dark:bg-bgDark border-2 border-dotted dark:border-gray-500"
+            >
+                Drop Collum Here
+            </div>
         );
     return (
         <div
             ref={setNodeRef}
             style={style}
-            className="flex-shrink-0 mr-2 p-1 w-80 max-h-[69vh]  overflow-y-auto hover:bg-white dark:hover:bg-bgDark hover:shadow-lg"
+            className="flex-shrink-0 mr-2 p-2 w-80 min-h-[100px] bg-white dark:bg-bgDark hover:shadow-2xl transition-all"
         >
-            <header {...attributes} {...listeners} className="block">
-                <div className="flex items-center justify-between">
+            <header
+                {...attributes}
+                {...listeners}
+                className="flex items-center justify-between
+            "
+            >
+                <div className="flex-1">
                     <div className="flex items-center">
-                        <div className="text-[8px]">
-                            <i
-                                className="fa-solid fa-circle"
-                                style={{ color: '#e70d39' }}
-                            ></i>
-                        </div>
-                        <div className="mx-2 text-black dark:text-white font-medium">
-                            {editMode ? (
-                                <input
-                                    className="py-1 px-2 outline-none bg-transparent border rounded-lg dark:border-gray-600"
-                                    onBlur={() => setEditMode(false)}
-                                />
-                            ) : (
-                                <p onClick={() => setEditMode(true)}>
-                                    {column.title}
-                                    <span className="ml-1 text-sm font-normal">
-                                        (6 Task)
-                                    </span>
-                                </p>
-                            )}
-                        </div>
+                        <span className="text-[8px]">
+                            <i className="fa-solid fa-circle"></i>
+                        </span>
+                        <span className="mx-2 text-base text-black dark:text-white">
+                            {column.title}
+                        </span>
                     </div>
-                    <button onClick={handelLogger} className="px-2">
-                        <i className="fa-regular fa-ellipsis-vertical"></i>
-                    </button>
+                    <p className="text-sm">{tasks.length} Card Tasks</p>
                 </div>
-                <button className="my-2 w-full h-9 rounded-lg border hover:bg-hoverLight dark:bg-hoverDark dark:border-none dark:text-white">
+                <button className="w-10 h-10 rounded-full  text-white bg-light dark:bg-hoverDark ">
                     <i className="fa-regular fa-plus"></i>
                 </button>
+                <button className="w-8 h-8">
+                    <i className="fa-regular fa-ellipsis-vertical"></i>
+                </button>
             </header>
-            <main>
+            <main className="my-2 flex flex-col gap-2 h-[440px] overflow-y-scroll">
                 <SortableContext items={tasksIds}>
                     {tasks.map((task) => (
                         <KabanItem task={task} key={task.id} />
