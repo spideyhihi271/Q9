@@ -1,0 +1,18 @@
+.sidebar {
+    &-wrapper-active {
+        width: 68px !important;
+    }
+    &-label-active {
+        display: none;
+    }
+    &-icon-active {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    &-scale-active {
+        p {
+            display: none;
+        }
+    }
+}

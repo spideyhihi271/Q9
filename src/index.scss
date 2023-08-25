@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Add fonts
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+// Add icons
+@import url('./assets/vendors/fonts/css/all.css');
+
+// Add base
+@layer base {
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+}
