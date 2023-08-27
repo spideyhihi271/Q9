@@ -1,26 +1,12 @@
 import React from 'react';
 
-function Button({
-    children,
-    to,
-    href,
-    larger = false,
-    small = false,
-    onlyIcon = false,
-    border = false,
-    leftIcon,
-}) {
-    const Element = 'button';
-    const classesDefault = '';
-    const classesIcon = 'w-10 h-10 ';
+function Button({ children, icon }) {
+    let Comp = 'button';
     return (
-        <Element
-            className={`flex items-center justify-center rounded hover:bg-hoverLight hover:text-light dark:hover:bg-hoverDark dark:hover:text-dark ${
-                onlyIcon ? classesIcon : ''
-            } ${border ? 'border' : ''} `}
-        >
-            {children}
-        </Element>
+        <Comp className="h-10 w-full border-[2px] dark:border-transparent dark:text-white rounded-3xl dark:bg-secondDark dark:hover:bg-hoverDark transition-colors">
+            {icon && <span className="mr-2">{icon}</span>}
+            <span className="text-sm">{children}</span>
+        </Comp>
     );
 }
 

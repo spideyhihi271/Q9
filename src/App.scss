@@ -1,4 +1,11 @@
-.hidden-ellipsis {
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.swiper {
+    width: 100%;
+    height: 100%;
+    overflow-y: unset;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

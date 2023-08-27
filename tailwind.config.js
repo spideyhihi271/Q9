@@ -5,11 +5,12 @@ export default {
     theme: {
         extend: {
             colors: {
-                light: '#4097ff',
-                hoverLight: '#f6f8fb',
-                dark: '#e8e9eb',
-                hoverDark: '#1c1d1f',
-                bgDark: '#111214',
+                main: '#fe526d',
+                hoverLight: '#f2f2f2',
+                hoverDark: '#2F2739',
+                bgDark: '#0c021c',
+                borderDark: '#242424',
+                secondDark: '#1d1d1d',
             },
         },
     },

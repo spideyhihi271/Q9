@@ -1,16 +1,19 @@
 import React from 'react';
+// Components
+import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 
 function Default({ children }) {
     return (
-        <div className="flex h-screen w-screen overflow-hidden">
-            <aside className="h-full">
-                <Sidebar />
-            </aside>
-            <main className="flex-1 border  text-slate-600 bg-white dark:border-gray-800  dark:bg-bgDark transition-colors">
-                {children}
+        <main className="flex w-screen h-screen overflow-hidden dark:bg-bgDark">
+            <Sidebar />
+            <main className="flex-1 py-3 px-2">
+                <div className="relative h-screen ml-10  overflow-y-auto">
+                    <Header />
+                    {children}
+                </div>
             </main>
-        </div>
+        </main>
     );
 }
 

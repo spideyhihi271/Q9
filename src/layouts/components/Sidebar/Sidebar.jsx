@@ -1,56 +1,67 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import configs from '../../../configs';
-import logo from '../../../assets/images/logo.png';
+import { Link } from 'react-router-dom';
 
-function Header() {
-    const [darkMode, setDarkMode] = useState(false);
+// Asset
+import './Sidebar.scss';
+
+function Sidebar() {
+    // Default
     const navList = [
         {
+            link: '/',
             icon: <i className="fa-light fa-grid-2"></i>,
-            title: 'Dashboard',
-            link: configs.routes.dashboard,
-            notify: 0,
+            title: 'Trang chủ',
         },
         {
-            icon: <i className="fa-light fa-comment"></i>,
-            title: 'Chat',
-            link: configs.routes.dashboard,
-            notify: 0,
+            link: '/',
+            icon: <i className="fa-light fa-compass"></i>,
+            title: 'Khám phá',
         },
         {
-            icon: <i className="fa-light fa-files"></i>,
-            title: 'Projects',
-            link: configs.routes.project,
-            notify: 1,
+            link: '/',
+            icon: <i className="fa-light fa-album"></i>,
+            title: 'Thư viện',
         },
         {
-            icon: <i className="fa-light fa-circle-check"></i>,
-            title: 'Tasks',
-            link: configs.routes.dashboard,
-            notify: 0,
+            link: '/',
+            icon: <i className="fa-light fa-grid-2"></i>,
+            title: 'Nâng cấp',
         },
         {
-            icon: <i className="fa-light fa-bell"></i>,
-            title: 'Notifications',
-            link: configs.routes.dashboard,
-            notify: 0,
+            link: '/',
+            icon: <i className="fa-light fa-grid-2"></i>,
+            title: 'BXH Nhạc mới',
         },
         {
-            icon: <i className="fa-light fa-user"></i>,
-            title: 'Team',
-            link: configs.routes.dashboard,
-            notify: 0,
+            link: '/',
+            icon: <i className="fa-light fa-compass"></i>,
+            title: 'Chủ đề và Thể loại',
         },
         {
-            icon: <i className="fa-light fa-gear"></i>,
-            title: 'Settings',
-            link: configs.routes.dashboard,
-            notify: 0,
+            link: '/',
+            icon: <i className="fa-light fa-album"></i>,
+            title: 'Top 100',
+        },
+        {
+            link: '/',
+            icon: <i className="fa-light fa-grid-2"></i>,
+            title: 'Nghe gần đây',
+        },
+        {
+            link: '/',
+            icon: <i className="fa-light fa-grid-2"></i>,
+            title: 'Bài hát yêu thích',
+        },
+        {
+            link: '/',
+            icon: <i className="fa-light fa-grid-2"></i>,
+            title: 'Đã tải lên',
         },
     ];
+
+    // State
+    const [miniSize, setMiniSize] = useState(false);
+    const [darkMode, setDarkMode] = useState(false);
     const handelDarkMode = (value) => {
         let documentPage = document.documentElement;
         if (value) {
@@ -61,60 +72,118 @@ function Header() {
             documentPage.classList.add('light');
         }
     };
+
     useEffect(() => {
         handelDarkMode(darkMode);
     }, [darkMode]);
 
+    // Render
     return (
-        <div className="relative w-16 h-full dark:bg-black">
-            <div className="mx-auto px-2 w-14 h-14 border-b-[1px] dark:border-b-gray-700">
-                <Link className="w-full h-full">
-                    <img
-                        className="w-full h-full object-contain"
-                        src={logo}
-                        alt="logo"
-                    />
-                </Link>
-            </div>
-            <nav className="my-2">
-                {navList.map((nav, idx) => (
-                    <Tippy content={nav.title} placement="right">
-                        <NavLink className="relative flex items-center justify-center w-14 h-14 mx-auto rounded-lg group hover:bg-hoverLight dark:hover:bg-hoverDark  transition-all">
-                            <span className="text-xl text-gray-500 dark:text-white group-hover:text-light dark:group-hover:text-white">
+        <>
+            <aside
+                className={` border-r-[1px] dark:border-0 bg-white dark:bg-[#0c021c] transition-all
+                    ${miniSize ? 'w-16' : 'w-60'}`}
+            >
+                <header
+                    className={`mb-2 px-4 flex items-center justify-between flex-wrap h-16 ${
+                        miniSize ? 'px-0 py-2 h-fit' : ''
+                    }`}
+                >
+                    <div className="flex-1">
+                        <div
+                            className={`flex items-center ${
+                                miniSize ? 'scale-75 translate-x-[-20%]' : ''
+                            }`}
+                        >
+                            <div className="mr-2 w-4 h-4 rounded-full bg-red-600"></div>
+                            <div className="mr-2 w-4 h-4 rounded-full bg-yellow-300"></div>
+                            <div className="mr-2 w-4 h-4 rounded-full bg-green-500"></div>
+                        </div>
+                    </div>
+                    <div className="w-fit mx-auto">
+                        <button
+                            className="w-8 h-8 rounded-lg border text-black dark:border-0 text-xl dark:text-white"
+                            onClick={() => setMiniSize(!miniSize)}
+                        >
+                            <i className="fa-light fa-bars-progress"></i>
+                        </button>
+                    </div>
+                </header>
+                <nav className="mb-4">
+                    <p className="mx-4 text-sm font-normal text-gray-400">
+                        MENU
+                    </p>
+                    {navList.slice(0, navList.length / 2).map((nav, idx) => (
+                        <Link
+                            to={nav.link}
+                            className={`mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight dark:hover:bg-transparent ${
+                                miniSize ? 'justify-center' : ''
+                            }`}
+                        >
+                            <span
+                                className={`w-8 text-xl ${
+                                    miniSize ? 'text-center' : ''
+                                } `}
+                            >
                                 {nav.icon}
                             </span>
-                            {nav.notify > 0 && (
-                                <span className="absolute top-[10%] right-[10%] flex items-center justify-center w-4 h-4 bg-red-500 text-white rounded-full border-2 border-white text-xs">
-                                    1
-                                </span>
+                            {!miniSize && (
+                                <p className="text-sm">{nav.title}</p>
                             )}
-                        </NavLink>
-                    </Tippy>
-                ))}
-            </nav>
-            <nav className="absolute left-0 bottom-4 w-full">
-                <div className="mx-auto w-9 h-9 rounded-full overflow-hidden">
-                    <Link className="w-full h-full">
-                        <img
-                            className="w-full h-full object-cover"
-                            src="https://thuthuatnhanh.com/wp-content/uploads/2022/12/hinh-anh-nguoi-dep-1.jpg"
-                            alt="logo"
-                        />
-                    </Link>
-                </div>
-                <div
-                    className="my-2 mx-auto flex items-center justify-center w-9 h-9 rounded-full border text-lg"
-                    onClick={() => setDarkMode(!darkMode)}
-                >
-                    {darkMode ? (
-                        <i className="fa-light fa-moon"></i>
-                    ) : (
-                        <i className="fa-light fa-sun"></i>
+                        </Link>
+                    ))}
+                </nav>
+
+                <p className="mx-4 text-sm font-normal text-gray-400">KHÁC</p>
+                <main className="h-1/2 overflow-y-auto">
+                    {navList
+                        .slice(navList.length / 2, navList.length)
+                        .map((nav, idx) => (
+                            <Link
+                                to={nav.link}
+                                className={`mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight dark:hover:bg-transparent ${
+                                    miniSize ? 'justify-center' : ''
+                                }`}
+                            >
+                                <span
+                                    className={`w-8 text-xl ${
+                                        miniSize ? 'text-center' : ''
+                                    } `}
+                                >
+                                    {nav.icon}
+                                </span>
+                                {!miniSize && (
+                                    <p className="text-sm">{nav.title}</p>
+                                )}
+                            </Link>
+                        ))}
+                    {!miniSize && (
+                        <>
+                            {navList
+                                .slice(navList.length / 2, navList.length)
+                                .map((nav, idx) => (
+                                    <Link
+                                        to={nav.link}
+                                        className="mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight dark:hover:bg-transparent"
+                                    >
+                                        <span className="w-8 text-xl">
+                                            <i className="fa-light fa-folder-music"></i>
+                                        </span>
+                                        <p className="text-sm ">Tên Playlist</p>
+                                    </Link>
+                                ))}
+                        </>
                     )}
-                </div>
-            </nav>
-        </div>
+                </main>
+            </aside>
+            <button
+                className="fixed bottom-[50px] right-[50px] z-[9999] w-10 h-10 dark:text-white border rounded-full text-sm"
+                onClick={() => setDarkMode(!darkMode)}
+            >
+                Dark
+            </button>
+        </>
     );
 }
 
-export default Header;
+export default Sidebar;
