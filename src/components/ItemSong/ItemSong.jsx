@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import config from '../../configs';
 import SubMenu from '../SubMenu';
 
 function ItemSong() {
@@ -41,25 +43,30 @@ function ItemSong() {
 
     return (
         <div className="w-full">
-            <header className="relative h-44 w-full group cursor-pointer rounded-2xl overflow-hidden">
-                <div className="absolute z-10 inset-0 bg-black/5 group-hover:bg-black/40"></div>
-                <div className="absolute top-2 right-2 z-10 text-white text-xs py-1 px-2  rounded-2xl overflow-hidden backdrop-blur bg-white/30 ">
-                    #1 Treding
-                </div>
-                <img
-                    className="absolute z-0 inset-0 w-full h-full object-cover"
-                    src="https://i1.sndcdn.com/artworks-000223908563-u648gv-t500x500.jpg"
-                    alt=""
-                />
-                <button className="absolute top-1/2 left-1/2 z-20 translate-x-[-50%] translate-y-[-50%] w-10 h-10 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all">
-                    <i class="fa-sharp fa-solid fa-play"></i>
-                </button>
-            </header>
+            <Link to={config.routes.watch}>
+                <header className="relative h-44 w-full group cursor-pointer rounded-2xl overflow-hidden">
+                    <div className="absolute z-10 inset-0 bg-black/5 group-hover:bg-black/40"></div>
+                    <div className="absolute top-2 right-2 z-10 text-white text-xs py-1 px-2  rounded-2xl overflow-hidden backdrop-blur bg-white/30 ">
+                        #1 Treding
+                    </div>
+                    <img
+                        className="absolute z-0 inset-0 w-full h-full object-cover"
+                        src="https://i1.sndcdn.com/artworks-000223908563-u648gv-t500x500.jpg"
+                        alt=""
+                    />
+                    <button className="absolute top-1/2 left-1/2 z-20 translate-x-[-50%] translate-y-[-50%] w-10 h-10 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all">
+                        <i class="fa-sharp fa-solid fa-play"></i>
+                    </button>
+                </header>
+            </Link>
             <footer className="my-2">
                 <div className="flex items-center justify-between">
-                    <h3 className="font-semibold dark:text-white">
+                    <Link
+                        to={config.routes.watch}
+                        className="font-semibold dark:text-white"
+                    >
                         Loving You Sunny
-                    </h3>
+                    </Link>
                     <SubMenu
                         data={actions}
                         visible={activeAction}

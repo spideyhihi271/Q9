@@ -8,7 +8,7 @@ import 'swiper/css/navigation';
 
 // Components
 import ItemSong from '../ItemSong';
-import ItemAlbum from '../ItemAlbum';
+import ItemPlaylist from '../ItemPlaylist';
 import ItemSiger from '../ItemSinger';
 import ItemCommunity from '../ItemCommunity';
 
@@ -26,7 +26,7 @@ function ListSlider({
 
     // Check Item
     let Item = ItemSong;
-    if (itemRender === 1) Item = ItemAlbum;
+    if (itemRender === 1) Item = ItemPlaylist;
     else if (itemRender === 2) Item = ItemSiger;
     else if (itemRender === 3) Item = ItemCommunity;
 
@@ -42,7 +42,7 @@ function ListSlider({
         }
     };
     return (
-        <div className="relative z-0 w-full h-96">
+        <div className="relative z-0 my-8 w-full h-80">
             <header className="mb-3 flex items-center">
                 {img && (
                     <Link>
@@ -56,14 +56,16 @@ function ListSlider({
 
                 <div className="flex-1">
                     <p className="text-gray-600 font-medium">{subTitle}</p>
-                    <h1 className="text-3xl font-bold dark:text-white">
+                    <h1 className="text-2xl font-bold dark:text-white">
                         {title}
                     </h1>
                 </div>
                 <div className="flex items-center">
-                    <button className="px-4 h-10 border dark:border-borderDark dark:text-white rounded-3xl text-sm hover:bg-hoverLight dark:hover:bg-hoverDark transition-all">
-                        <Link to={link}>Xem tất cả</Link>
-                    </button>
+                    {link && (
+                        <button className="px-4 h-10 border dark:border-borderDark dark:text-white rounded-3xl text-sm hover:bg-hoverLight dark:hover:bg-hoverDark transition-all">
+                            <Link to={link}>Xem tất cả</Link>
+                        </button>
+                    )}
                     <button
                         className="mx-2 w-10 h-10 border dark:border-borderDark dark:text-white rounded-full text-sm hover:bg-hoverLight dark:hover:bg-hoverDark transition-all"
                         onClick={() => handelPrev()}

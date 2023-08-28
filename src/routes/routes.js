@@ -2,8 +2,11 @@ import configs from '../configs';
 
 // Components
 import Home from '../pages/Home';
-import Dashboard from '../pages/Dashboard';
-import Project from '../pages/Project';
+import Library from '../pages/Library';
+import History from '../pages/History';
+import Playlist from '../pages/Playlist';
+import Profile from '../pages/Profile';
+import Watch from '../pages/Watch';
 
 const publicRoutes = [
     {
@@ -11,15 +14,27 @@ const publicRoutes = [
         component: Home,
     },
     {
-        path: configs.routes.dashboard,
-        component: Dashboard,
+        path: configs.routes.library,
+        component: Library,
     },
     {
-        path: configs.routes.project,
-        component: Project,
+        path: configs.routes.history,
+        component: History,
+    },
+    {
+        path: configs.routes.playList,
+        component: Playlist,
+    },
+    {
+        path: configs.routes.profile,
+        component: Profile,
+    },
+    {
+        path: configs.routes.watch,
+        component: Watch,
     },
 ];
 
 const privateRoutes = [];
 
-export { publicRoutes, privateRoutes };
+export { privateRoutes, publicRoutes };

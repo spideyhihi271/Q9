@@ -1,7 +1,10 @@
 const routes = {
     home: '/',
-    dashboard: '/dashboard',
-    project: '/project',
+    library: '/library',
+    history: '/history',
+    playList: '/playlist',
+    profile: '/profile',
+    watch: '/watch',
 };
 
 export default routes;

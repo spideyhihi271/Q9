@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Submenu from '../SubMenu';
 import { Link } from 'react-router-dom';
 
-function ItemSongVertical() {
+function ItemSongVertical({ showFullInfo = false }) {
     // Default
     const actions = [
         {
@@ -49,11 +49,20 @@ function ItemSongVertical() {
             />
             <div className="flex-1 mx-3">
                 <p className="text-sm dark:text-white">There's No One At All</p>
-                <p className="text-xs text-gray-400">
-                    <Link className="hover:underline">Sơn Tùng MTP</Link>
-                </p>
-                <p className="text-xs text-gray-400">3 ngày trước</p>
+                {!showFullInfo && (
+                    <>
+                        <p className="text-xs text-gray-400">Sơn Tùng MTP</p>
+                        <p className="text-xs text-gray-400">3 ngày trước</p>
+                    </>
+                )}
             </div>
+            {showFullInfo && (
+                <div className="flex-[2] flex text-gray-500 text-sm">
+                    <p className="flex-1 text-left">Sơn Tùng MTP</p>
+                    <p className="flex-1 text-left">Một MV nào đó (Single)</p>
+                    <p className="flex-1 text-center">3:50</p>
+                </div>
+            )}
             <Submenu
                 data={actions}
                 visible={activeAction}

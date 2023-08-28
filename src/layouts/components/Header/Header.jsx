@@ -46,7 +46,7 @@ function Header() {
     const [activeSettings, setActiveSettings] = useState(false);
     const [activeLogger, setActiveLogger] = useState(false);
     return (
-        <header className="sticky top-0 z-[9999] flex items-center w-full bg-white dark:bg-bgDark pb-4">
+        <header className="sticky top-0 z-[9999] flex items-center w-full pb-4">
             <div className="flex-1">
                 <Search />
             </div>

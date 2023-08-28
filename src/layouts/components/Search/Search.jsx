@@ -24,7 +24,7 @@ function Search() {
                 </div>
             )}
         >
-            <div className="flex w-96 h-10 border dark:border-transparent rounded-lg dark:bg-secondDark">
+            <div className="flex w-96 h-10 border dark:border-transparent rounded-lg dark:bg-gray-900">
                 <button className="h-full w-10 dark:text-white">
                     <i className="fa-light fa-magnifying-glass"></i>
                 </button>

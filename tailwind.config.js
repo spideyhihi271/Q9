@@ -7,10 +7,10 @@ export default {
             colors: {
                 main: '#fe526d',
                 hoverLight: '#f2f2f2',
-                hoverDark: '#2F2739',
+                hoverDark: '#111827',
                 bgDark: '#0c021c',
                 borderDark: '#242424',
-                secondDark: '#1d1d1d',
+                secondDark: '#111827',
             },
         },
     },

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Asset
+import config from '../../../configs';
 import './Sidebar.scss';
 
 function Sidebar() {
     // Default
     const navList = [
         {
-            link: '/',
+            link: config.routes.home,
             icon: <i className="fa-light fa-grid-2"></i>,
             title: 'Trang chủ',
         },
@@ -18,43 +19,33 @@ function Sidebar() {
             title: 'Khám phá',
         },
         {
-            link: '/',
+            link: config.routes.library,
             icon: <i className="fa-light fa-album"></i>,
             title: 'Thư viện',
         },
         {
             link: '/',
-            icon: <i className="fa-light fa-grid-2"></i>,
+            icon: <i className="fa-light fa-record-vinyl"></i>,
             title: 'Nâng cấp',
         },
         {
             link: '/',
-            icon: <i className="fa-light fa-grid-2"></i>,
-            title: 'BXH Nhạc mới',
-        },
-        {
-            link: '/',
-            icon: <i className="fa-light fa-compass"></i>,
+            icon: <i className="fa-regular fa-tv-music"></i>,
             title: 'Chủ đề và Thể loại',
         },
         {
-            link: '/',
-            icon: <i className="fa-light fa-album"></i>,
-            title: 'Top 100',
-        },
-        {
-            link: '/',
-            icon: <i className="fa-light fa-grid-2"></i>,
+            link: config.routes.history,
+            icon: <i className="fa-regular fa-clock-rotate-left"></i>,
             title: 'Nghe gần đây',
         },
         {
             link: '/',
-            icon: <i className="fa-light fa-grid-2"></i>,
+            icon: <i className="fa-sharp fa-regular fa-heart"></i>,
             title: 'Bài hát yêu thích',
         },
         {
             link: '/',
-            icon: <i className="fa-light fa-grid-2"></i>,
+            icon: <i className="fa-regular fa-upload"></i>,
             title: 'Đã tải lên',
         },
     ];
@@ -116,7 +107,7 @@ function Sidebar() {
                     {navList.slice(0, navList.length / 2).map((nav, idx) => (
                         <Link
                             to={nav.link}
-                            className={`mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight dark:hover:bg-transparent ${
+                            className={`mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight dark:hover:bg-hoverDark ${
                                 miniSize ? 'justify-center' : ''
                             }`}
                         >
@@ -140,8 +131,9 @@ function Sidebar() {
                         .slice(navList.length / 2, navList.length)
                         .map((nav, idx) => (
                             <Link
+                                key={idx}
                                 to={nav.link}
-                                className={`mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight dark:hover:bg-transparent ${
+                                className={`mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight  dark:hover:bg-hoverDark ${
                                     miniSize ? 'justify-center' : ''
                                 }`}
                             >
@@ -159,19 +151,18 @@ function Sidebar() {
                         ))}
                     {!miniSize && (
                         <>
-                            {navList
-                                .slice(navList.length / 2, navList.length)
-                                .map((nav, idx) => (
-                                    <Link
-                                        to={nav.link}
-                                        className="mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight dark:hover:bg-transparent"
-                                    >
-                                        <span className="w-8 text-xl">
-                                            <i className="fa-light fa-folder-music"></i>
-                                        </span>
-                                        <p className="text-sm ">Tên Playlist</p>
-                                    </Link>
-                                ))}
+                            {navList.slice(0, 3).map((nav, idx) => (
+                                <Link
+                                    key={idx}
+                                    to={nav.link}
+                                    className="mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight  dark:hover:bg-hoverDark"
+                                >
+                                    <span className="w-8 text-xl">
+                                        <i className="fa-light fa-folder-music"></i>
+                                    </span>
+                                    <p className="text-sm ">Tên Playlist</p>
+                                </Link>
+                            ))}
                         </>
                     )}
                 </main>
