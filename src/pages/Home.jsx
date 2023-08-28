@@ -3,7 +3,6 @@ import TagList from '../components/TagList';
 import ListSlider from '../components/ListSlider';
 import ListGrid from '../components/ListGrid';
 
-
 function Home() {
     const renderTest = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     return (
@@ -43,6 +42,7 @@ function Home() {
                 title="Các bài hát thịnh hành"
                 subTitle="DÀNH CHO BẠN"
                 data={renderTest}
+                col={2}
             />
         </>
     );
