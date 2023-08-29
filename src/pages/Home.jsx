@@ -36,7 +36,7 @@ function Home() {
                 slicePerView={6}
             />
             <ListSlider
-                title="Danh sách phát thịnh hành trên cộng đồng"
+                title="Danh sách phát thịnh hành"
                 subTitle="DÀNH CHO BẠN"
                 data={renderTest}
                 itemRender={3}

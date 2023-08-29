@@ -23,11 +23,11 @@ function Default({ children }) {
         <div className="flex w-screen h-screen overflow-hidden dark:bg-bgDark">
             <Sidebar miniSize={miniSize} setMiniSize={setMiniSize} />
             <main className="flex-1">
-                <div className="relative h-screen px-3 md:px-10  overflow-y-auto">
+                <div className="relative h-screen w-full px-3 md:px-10 overflow-y-auto">
                     <div className="pt-3 sticky top-0 left-0 z-[99] w-full bg-white dark:bg-bgDark">
                         <Header setActiveSidebar={setMiniSize} />
                     </div>
-                    <div className="h-fit mb-22">{children}</div>
+                    <div className="h-fit w-full mb-22">{children}</div>
                 </div>
             </main>
         </div>

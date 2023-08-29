@@ -30,16 +30,18 @@ function TagList() {
         },
     ];
     return (
-        <ul className="taglist snap-x my-8 flex items-center overflow-x-auto">
-            {tags.map((tag, idx) => (
-                <Link
-                    className="mr-2 px-2 flex-shrink-0 flex items-center justify-center h-10 w-fit snap-center text-sm bg-[#f2f2f2] dark:bg-hoverDark dark:text-white rounded-lg"
-                    key={idx}
-                >
-                    {tag.title}
-                </Link>
-            ))}
-        </ul>
+        <div className="w-[95vw] lg:w-full overflow-hidden">
+            <ul className="taglist snap-x my-8 flex items-center w-[90%] overflow-x-auto">
+                {tags.map((tag, idx) => (
+                    <Link
+                        className="mr-2 px-2 flex-shrink-0 flex items-center justify-center h-10 w-fit snap-center text-sm bg-[#f2f2f2] dark:bg-hoverDark dark:text-white rounded-lg"
+                        key={idx}
+                    >
+                        {tag.title}
+                    </Link>
+                ))}
+            </ul>
+        </div>
     );
 }
 

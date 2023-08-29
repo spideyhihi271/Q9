@@ -70,7 +70,7 @@ function Header({ setActiveSidebar }) {
             <div className="flex-1 hidden lg:block">
                 <Search />
             </div>
-            <nav className=" flex items-center">
+            <nav className="flex items-center">
                 <Link className="lg:hidden flex items-center justify-center ml-2 lg:ml-4 h-9 w-9 lg:h-10 lg:w-10 border rounded-full dark:bg-hoverDark dark:border-0 dark:text-white">
                     <i className="fa-light fa-magnifying-glass"></i>
                 </Link>

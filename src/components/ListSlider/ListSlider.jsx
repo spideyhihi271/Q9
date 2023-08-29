@@ -56,11 +56,11 @@ function ListSlider({
                     </Link>
                 )}
 
-                <div className="flex-1">
+                <div className="flex-1 max-w-[80%]">
                     <p className="text-gray-600 font-medium">{subTitle}</p>
-                    <h1 className="text-2xl font-bold dark:text-white">
+                    <h3 className="mb-3 font-bold text-xl dark:text-white">
                         {title}
-                    </h1>
+                    </h3>
                 </div>
                 <div className="flex items-center">
                     {link && (
