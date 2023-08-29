@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import config from '../../../configs';
 import './Sidebar.scss';
 
-function Sidebar() {
+function Sidebar({ miniSize, setMiniSize }) {
     // Default
     const navList = [
         {
@@ -30,29 +30,35 @@ function Sidebar() {
         },
         {
             link: '/',
-            icon: <i className="fa-regular fa-tv-music"></i>,
+            icon: <i className="fa-light fa-tv-music"></i>,
             title: 'Chủ đề và Thể loại',
         },
         {
             link: config.routes.history,
-            icon: <i className="fa-regular fa-clock-rotate-left"></i>,
+            icon: <i className="fa-light fa-clock-rotate-left"></i>,
             title: 'Nghe gần đây',
         },
         {
             link: '/',
-            icon: <i className="fa-sharp fa-regular fa-heart"></i>,
+            icon: <i className="fa-sharp fa-light fa-heart"></i>,
             title: 'Bài hát yêu thích',
         },
         {
             link: '/',
-            icon: <i className="fa-regular fa-upload"></i>,
+            icon: <i className="fa-light fa-arrow-up-from-bracket"></i>,
             title: 'Đã tải lên',
         },
     ];
 
     // State
-    const [miniSize, setMiniSize] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
+
+    // Hooks
+    useEffect(() => {
+        handelDarkMode(darkMode);
+    }, [darkMode]);
+
+    //Handel
     const handelDarkMode = (value) => {
         let documentPage = document.documentElement;
         if (value) {
@@ -64,20 +70,20 @@ function Sidebar() {
         }
     };
 
-    useEffect(() => {
-        handelDarkMode(darkMode);
-    }, [darkMode]);
-
     // Render
     return (
         <>
             <aside
-                className={` border-r-[1px] dark:border-0 bg-white dark:bg-[#0c021c] transition-all
-                    ${miniSize ? 'w-16' : 'w-60'}`}
+                className={`fixed z-[9999] lg:relative h-screen overflow-y-auto border-r-[1px] dark:border-0 bg-white dark:bg-[#0c021c] transition-all
+                    ${
+                        miniSize
+                            ? 'translate-x-0 w-60 lg:w-16'
+                            : 'translate-x-[-100%] lg:translate-x-0 w-0 lg:w-60'
+                    }`}
             >
                 <header
                     className={`mb-2 px-4 flex items-center justify-between flex-wrap h-16 ${
-                        miniSize ? 'px-0 py-2 h-fit' : ''
+                        miniSize ? 'mx-2 lg:mx-0 p-2 h-20' : ''
                     }`}
                 >
                     <div className="flex-1">
@@ -96,7 +102,12 @@ function Sidebar() {
                             className="w-8 h-8 rounded-lg border text-black dark:border-0 text-xl dark:text-white"
                             onClick={() => setMiniSize(!miniSize)}
                         >
-                            <i className="fa-light fa-bars-progress"></i>
+                            <span className="hidden lg:block">
+                                <i className="fa-light fa-bars-progress"></i>
+                            </span>
+                            <span className="block lg:hidden">
+                                <i className="fa-light fa-xmark"></i>
+                            </span>
                         </button>
                     </div>
                 </header>
@@ -106,9 +117,10 @@ function Sidebar() {
                     </p>
                     {navList.slice(0, navList.length / 2).map((nav, idx) => (
                         <Link
+                            key={idx}
                             to={nav.link}
-                            className={`mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight dark:hover:bg-hoverDark ${
-                                miniSize ? 'justify-center' : ''
+                            className={`mx-2 p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight dark:hover:bg-hoverDark ${
+                                miniSize ? 'lg: px-0 lg:justify-center' : ''
                             }`}
                         >
                             <span
@@ -118,13 +130,16 @@ function Sidebar() {
                             >
                                 {nav.icon}
                             </span>
-                            {!miniSize && (
-                                <p className="text-sm">{nav.title}</p>
-                            )}
+                            <p
+                                className={`text-sm ${
+                                    miniSize ? 'mx-2 lg:mx-0 lg:hidden' : ''
+                                }`}
+                            >
+                                {nav.title}
+                            </p>
                         </Link>
                     ))}
                 </nav>
-
                 <p className="mx-4 text-sm font-normal text-gray-400">KHÁC</p>
                 <main className="h-1/2 overflow-y-auto">
                     {navList
@@ -133,8 +148,8 @@ function Sidebar() {
                             <Link
                                 key={idx}
                                 to={nav.link}
-                                className={`mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight  dark:hover:bg-hoverDark ${
-                                    miniSize ? 'justify-center' : ''
+                                className={`mx-2 p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight dark:hover:bg-hoverDark ${
+                                    miniSize ? 'lg: px-0 lg:justify-center' : ''
                                 }`}
                             >
                                 <span
@@ -144,9 +159,13 @@ function Sidebar() {
                                 >
                                     {nav.icon}
                                 </span>
-                                {!miniSize && (
-                                    <p className="text-sm">{nav.title}</p>
-                                )}
+                                <p
+                                    className={`text-sm ${
+                                        miniSize ? 'mx-2 lg:mx-0 lg:hidden' : ''
+                                    }`}
+                                >
+                                    {nav.title}
+                                </p>
                             </Link>
                         ))}
                     {!miniSize && (

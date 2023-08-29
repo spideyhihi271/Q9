@@ -41,14 +41,16 @@ function ItemSongVertical({ showFullInfo = false }) {
     const [activeAction, setActiveAction] = useState(false);
 
     return (
-        <Link className="px-2 py-3 flex items-center justify-between rounded-lg  hover:bg-hoverLight dark:hover:bg-hoverDark">
+        <div className="py-3 flex items-center justify-between rounded-lg">
             <img
-                className="w-14 h-14 rounded-lg object-cover"
+                className="w-10 h-10 lg:w-14 lg:h-14 rounded-lg object-cover"
                 src="https://image-us.eva.vn/upload/2-2022/images/2022-04-29/1651219668-671-thumbnail-width640height480.jpg"
                 alt=""
             />
             <div className="flex-1 mx-3">
-                <p className="text-sm dark:text-white">There's No One At All</p>
+                <Link className="text-sm font-medium dark:text-white hover:underline">
+                    There's No One At All
+                </Link>
                 {!showFullInfo && (
                     <>
                         <p className="text-xs text-gray-400">Sơn Tùng MTP</p>
@@ -58,9 +60,15 @@ function ItemSongVertical({ showFullInfo = false }) {
             </div>
             {showFullInfo && (
                 <div className="flex-[2] flex text-gray-500 text-sm">
-                    <p className="flex-1 text-left">Sơn Tùng MTP</p>
-                    <p className="flex-1 text-left">Một MV nào đó (Single)</p>
-                    <p className="flex-1 text-center">3:50</p>
+                    <p className="text-xs lg:text-sm flex-1 text-left">
+                        Sơn Tùng MTP
+                    </p>
+                    <p className="text-xs lg:text-sm flex-1 text-left">
+                        Một MV nào đó (Single)
+                    </p>
+                    <p className="text-xs lg:text-sm flex-1 text-center">
+                        3:50
+                    </p>
                 </div>
             )}
             <Submenu
@@ -76,7 +84,7 @@ function ItemSongVertical({ showFullInfo = false }) {
                     <i className="fa-regular fa-ellipsis-vertical"></i>
                 </button>
             </Submenu>
-        </Link>
+        </div>
     );
 }
 

@@ -45,12 +45,12 @@ function Playlist() {
         <div>
             <header className="flex items-center justify-center">
                 <img
-                    className="w-60 h-60 object-cover rounded-2xl"
+                    className="w-40 h-40 lg:w-60 lg:h-60 object-cover rounded-2xl"
                     src="https://ilikestatic.s3.ap-southeast-1.amazonaws.com/news/articles/thumb/GhSyIXb20YV6lE6YS1UevEf0FyTF4SoJlkr3MZIk.jpg"
                     alt=""
                 />
-                <div className="ml-10 flex-1">
-                    <h1 className="mb-4 text-3xl font-bold dark:text-white">
+                <div className="ml-5 lg:ml-10 flex-1">
+                    <h1 className="mb-2 lg:mb-4 text-xl lg:text-3xl font-bold dark:text-white">
                         Tuyển tập nhạc nghe lại
                     </h1>
                     <div className="my-1 flex items-center text-sm text-gray-500">
@@ -71,7 +71,7 @@ function Playlist() {
                         </span>
                         <p>Thời lượng: 6 giờ, 35 phút</p>
                     </div>
-                    <p className="my-5 text-gray-500">
+                    <p className="my-2 lg:my-5 text-sm text-gray-500">
                         Siêu tuyển tập nhạc của tôi, tuyển tập những ca khúc
                         thuộc nhiều thể loại nhạc bạn yêu thích. Danh sách này
                         được cập nhật liên tục.
@@ -81,7 +81,7 @@ function Playlist() {
                             <span className="w-8">
                                 <i className="fa-regular fa-arrows-cross"></i>
                             </span>
-                            <span>Trộn bài</span>
+                            <span className="hidden lg:block">Trộn bài</span>
                         </button>
                         <button className="mr-2 px-2 flex items-center h-10 w-fit border rounded-full dark:border-borderDark dark:text-white">
                             <span className="w-8">
@@ -99,14 +99,19 @@ function Playlist() {
                                 onClick={() => setActiveAction(!activeAction)}
                                 className="w-8 h-8 rounded-full border dark:border-borderDark dark:text-white"
                             >
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                <i className="fa-solid fa-ellipsis-vertical"></i>
                             </button>
                         </Submenu>
                     </div>
                 </div>
             </header>
             <main className="py-10">
-                <ListGrid title='Nội dung' data={renderTest} col={1} showFullInfo />
+                <ListGrid
+                    title="Nội dung"
+                    data={renderTest}
+                    col={1}
+                    showFullInfo
+                />
             </main>
         </div>
     );

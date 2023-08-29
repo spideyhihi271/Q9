@@ -19,7 +19,9 @@ function ListSlider({
     link,
     data,
     itemRender,
-    slicePerView = 3.5,
+    slicePerView = 6,
+    slicePerMd = 3.2,
+    slidePerSm = 2.2,
 }) {
     // State
     const swiperRef = useRef();
@@ -85,8 +87,18 @@ function ListSlider({
                     ref={swiperRef}
                     className="block w-full"
                     loop
-                    slidesPerView={slicePerView}
                     spaceBetween={16}
+                    breakpoints={{
+                        320: {
+                            slidesPerView: slidePerSm,
+                        },
+                        768: {
+                            slidesPerView: slicePerMd,
+                        },
+                        1024: {
+                            slidesPerView: slicePerView,
+                        },
+                    }}
                 >
                     {data.map((item, idx) => (
                         <SwiperSlide key={idx}>

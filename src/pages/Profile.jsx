@@ -44,9 +44,9 @@ function Profile() {
 
     return (
         <div>
-            <header className="absolute top-0 left-0 h-[70vh] w-full">
+            <header className="relative h-[70vh] w-full">
                 <img
-                    className="absolute inset-0 z-0 w-full h-full object-cover"
+                    className="absolute inset-0 z-0 w-full h-full object-cover rounded-3xl"
                     src="https://i.ytimg.com/vi/CnZxamAbSnw/maxresdefault.jpg"
                     alt=""
                 />
@@ -89,13 +89,13 @@ function Profile() {
                                 onClick={() => setActiveAction(!activeAction)}
                                 className="w-8 h-8 rounded-full text-white hover:bg-bgDark/20"
                             >
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                <i className="fa-solid fa-ellipsis-vertical"></i>
                             </button>
                         </Submenu>
                     </div>
                 </footer>
             </header>
-            <main className="mt-[70vh]">
+            <main className="my-5">
                 <ListGrid
                     title="Bài hát"
                     data={renderTest}

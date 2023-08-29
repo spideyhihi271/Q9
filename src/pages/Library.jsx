@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ListSlider from '../components/ListSlider';
-import TagList from '../components/TagList';
 import Selector from '../components/Selector';
 
 function Library() {
@@ -19,7 +18,25 @@ function Library() {
             title: 'Phát gần đây',
         },
     ];
-    const renderTest = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const renderTest = [0, 1, 2, 3, 4, 5, 6, 7];
+    const filterList = [
+        {
+            id: 0,
+            title: 'Danh sách phát',
+        },
+        {
+            id: 1,
+            title: 'Bài hát',
+        },
+        {
+            id: 2,
+            title: 'Đĩa nhạc',
+        },
+        {
+            id: 3,
+            title: 'Nghệ sĩ',
+        },
+    ];
 
     // State
     const [selected, setSelected] = useState(data[0]);
@@ -34,11 +51,15 @@ function Library() {
     return (
         <div>
             <h1 className="text-[45px] font-bold dark:text-white">Thư viện</h1>
-            <header className="flex items-center justify-between">
-                <div className="flex-1">
-                    <TagList />
+            <header className="flex flex-wrap items-center justify-between">
+                <div className="my-4 flex-1">
+                    {filterList.map((item, idx) => (
+                        <button className="mr-1 p-2 border rounded-xl text-sm dark:border-transparent dark:text-white dark:bg-secondDark">
+                            {item.title}
+                        </button>
+                    ))}
                 </div>
-                <div className="relative w-fit">
+                <div className="relative w-full lg:w-fit">
                     <Selector
                         visible={showSort}
                         data={data}
@@ -52,7 +73,7 @@ function Library() {
                         >
                             <p className="text-sm ">{selected.title}</p>
                             <span className="w-8 text-center">
-                                <i class="fa-sharp fa-solid fa-caret-down"></i>
+                                <i className="fa-sharp fa-solid fa-caret-down"></i>
                             </span>
                         </button>
                     </Selector>

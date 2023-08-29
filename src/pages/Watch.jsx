@@ -49,10 +49,10 @@ function Watch() {
     const [activeAction, setActiveAction] = useState(false);
 
     return (
-        <section className="flex">
+        <section className="flex flex-wrap">
             <div className="flex-1">
                 <video
-                    className="w-full h-96"
+                    className="w-full h-80 lg:h-96 object-cover rounded-3xl"
                     src={video}
                     autoPlay
                     controls
@@ -107,7 +107,7 @@ function Watch() {
                     </div>
                 </div>
             </div>
-            <div className="ml-8 w-[40%]">
+            <div className="my-3 lg:my-0 lg:ml-8 w-full lg:w-[40%]">
                 <header className="h-10 flex items-center border-b-[1px] dark:border-b-gray-600">
                     {viewList.map((item, idx) => (
                         <button

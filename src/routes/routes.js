@@ -7,6 +7,7 @@ import History from '../pages/History';
 import Playlist from '../pages/Playlist';
 import Profile from '../pages/Profile';
 import Watch from '../pages/Watch';
+import Search from '../pages/Search';
 
 const publicRoutes = [
     {
@@ -32,6 +33,10 @@ const publicRoutes = [
     {
         path: configs.routes.watch,
         component: Watch,
+    },
+    {
+        path: configs.routes.search,
+        component: Search,
     },
 ];
 

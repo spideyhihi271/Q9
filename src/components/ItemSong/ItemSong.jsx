@@ -55,7 +55,7 @@ function ItemSong() {
                         alt=""
                     />
                     <button className="absolute top-1/2 left-1/2 z-20 translate-x-[-50%] translate-y-[-50%] w-10 h-10 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all">
-                        <i class="fa-sharp fa-solid fa-play"></i>
+                        <i className="fa-sharp fa-solid fa-play"></i>
                     </button>
                 </header>
             </Link>

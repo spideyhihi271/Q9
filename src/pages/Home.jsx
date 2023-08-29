@@ -8,19 +8,23 @@ function Home() {
     return (
         <>
             <TagList />
-            <ListSlider title="Video nhạc đề xuất" data={renderTest} />
+            <ListSlider
+                title="Video nhạc đề xuất"
+                data={renderTest}
+                slicePerView={4}
+                slicePerMd={2.2}
+                slidePerSm={1.2}
+            />
             <ListSlider
                 title="Tuyển tập nhạc cho bạn"
                 data={renderTest}
                 itemRender={1}
-                slicePerView={6}
             />
             <ListSlider
                 title="Đen"
                 subTitle="Album của"
                 img="https://media-cdn-v2.laodong.vn/storage/newsportal/2022/1/1/990706/Dvau.jpg"
                 data={renderTest}
-                slicePerView={6}
                 itemRender={1}
             />
             <ListSlider
@@ -43,6 +47,7 @@ function Home() {
                 subTitle="DÀNH CHO BẠN"
                 data={renderTest}
                 col={2}
+                showFullInfo
             />
         </>
     );

@@ -1,28 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import ItemSongVertical from '../ItemSongVertical';
+import ItemPlaylistVertical from '../ItemPlaylistVertical';
+import ItemSingerVertical from '../ItemSingerVertical';
 
-function ListGrid({ title, subTitle, img, link, data, showFullInfo, col = 3 }) {
+function ListGrid({ data, title, item }) {
+    // Check
+    let Item = ItemSongVertical;
+    if (item === 1) Item = ItemPlaylistVertical;
+    else if (item === 2) Item = ItemSingerVertical;
+    // State
+    const [renderList, setRenderList] = useState(data.slice(0, 3));
     return (
-        <section>
-            <header className="flex items-center">
-                <div className="flex-1">
-                    <p className="text-gray-600 font-medium">{subTitle}</p>
-                    <h1 className="text-2xl font-bold dark:text-white">
-                        {title}
-                    </h1>
-                </div>
-                {link && (
-                    <button className="px-4 h-10 border dark:border-borderDark dark:text-white rounded-3xl text-sm hover:bg-hoverLight dark:hover:bg-hoverDark transition-all">
-                        <Link to={link}>Xem tất cả</Link>
-                    </button>
-                )}
-            </header>
-            <div className={`my-2 grid grid-cols-${col}`}>
-                {data.map((item, idx) => (
-                    <ItemSongVertical key={idx} showFullInfo={showFullInfo} />
+        <section className="mb-8">
+            <h3 className="mb-3 font-bold text-xl dark:text-white">{title}</h3>
+            <main>
+                {renderList.map((item, idx) => (
+                    <Item key={idx} showFullInfo />
                 ))}
-            </div>
+            </main>
+            {data.length != renderList.length && (
+                <button
+                    className="mt-4 px-2 w-fit h-9 text-sm font-medium rounded-full border border-gray-500 dark:border-secondDark dark:text-white dark:bg-secondDark hover:bg-hoverLight transition-all"
+                    onClick={() => setRenderList(data)}
+                >
+                    Hiển thị tất cả
+                </button>
+            )}
         </section>
     );
 }
