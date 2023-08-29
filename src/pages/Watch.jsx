@@ -78,10 +78,10 @@ function Watch() {
                             </div>
                         </div>
                         <nav className="flex items-center">
-                            <button className="mx-1 w-10 h-10 rounded-full border dark:border-transparent dark:text-white dark:bg-hoverDark hover:scale-90 transition-all">
+                            <button className="mx-1 w-9 h-9 lg:w-10 lg:h-10 rounded-full border dark:border-transparent dark:text-white dark:bg-hoverDark hover:scale-90 transition-all">
                                 <i className="fa-sharp fa-regular fa-heart"></i>
                             </button>
-                            <button className="mx-1 w-10 h-10 rounded-full border dark:border-transparent dark:text-white dark:bg-hoverDark hover:scale-90 transition-all">
+                            <button className="mx-1 w-9 h-9 lg:w-10 lg:h-10 rounded-full border dark:border-transparent dark:text-white dark:bg-hoverDark hover:scale-90 transition-all">
                                 <i className="fa-regular fa-plus"></i>
                             </button>
                             <SubMenu
@@ -91,7 +91,7 @@ function Watch() {
                                 onClickOutside={() => setActiveAction(false)}
                             >
                                 <button
-                                    className="mx-1 w-10 h-10 rounded-full border dark:border-transparent dark:text-white dark:bg-hoverDark hover:scale-90 transition-all"
+                                    className="mx-1 w-9 h-9 lg:w-10 lg:h-10 rounded-full border dark:border-transparent dark:text-white dark:bg-hoverDark hover:scale-90 transition-all"
                                     onClick={() =>
                                         setActiveAction(!activeAction)
                                     }
@@ -100,7 +100,7 @@ function Watch() {
                                 </button>
                             </SubMenu>
 
-                            <button className="mx-1 px-5 w-fit h-10 text-sm rounded-full border dark:border-transparent dark:text-black dark:bg-white hover:scale-90 transition-all">
+                            <button className="mx-1 px-5 w-fit h-9 lg:h-10 text-sm rounded-full border dark:border-transparent dark:text-black dark:bg-white hover:scale-90 transition-all">
                                 Đăng kí
                             </button>
                         </nav>

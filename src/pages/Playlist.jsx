@@ -54,8 +54,8 @@ function Playlist() {
                         Tuyển tập nhạc nghe lại
                     </h1>
                     <div className="my-1 flex items-center text-sm text-gray-500">
-                        <p>Danh sách phát</p>
-                        <span className="mx-2 text-[5px]">
+                        <p className="hidden md:block">Danh sách phát</p>
+                        <span className="hidden md:block mx-2 text-[5px]">
                             <i className="fa-duotone fa-circle"></i>
                         </span>
                         <p>Three Circel</p>
@@ -69,9 +69,9 @@ function Playlist() {
                         <span className="mx-2 text-[5px]">
                             <i className="fa-duotone fa-circle"></i>
                         </span>
-                        <p>Thời lượng: 6 giờ, 35 phút</p>
+                        <p>6 giờ, 35 phút</p>
                     </div>
-                    <p className="my-2 lg:my-5 text-sm text-gray-500">
+                    <p className="hidden md:block my-2 lg:my-5 text-sm text-gray-500">
                         Siêu tuyển tập nhạc của tôi, tuyển tập những ca khúc
                         thuộc nhiều thể loại nhạc bạn yêu thích. Danh sách này
                         được cập nhật liên tục.
@@ -83,11 +83,13 @@ function Playlist() {
                             </span>
                             <span className="hidden lg:block">Trộn bài</span>
                         </button>
-                        <button className="mr-2 px-2 flex items-center h-10 w-fit border rounded-full dark:border-borderDark dark:text-white">
+                        <button className="my-2 mr-2 px-2 flex items-center h-10 w-fit border rounded-full dark:border-borderDark dark:text-white">
                             <span className="w-8">
                                 <i className="fa-regular fa-arrows-cross"></i>
                             </span>
-                            <span>Lưu vào thư viện</span>
+                            <span className="hidden md:block">
+                                Lưu vào thư viện
+                            </span>
                         </button>
                         <Submenu
                             data={actions}
