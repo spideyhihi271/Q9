@@ -56,7 +56,7 @@ function ListSlider({
                     </Link>
                 )}
 
-                <div className="flex-1 max-w-[80%]">
+                <div className="flex-1">
                     <p className="text-gray-600 font-medium">{subTitle}</p>
                     <h3 className="mb-3 font-bold text-xl dark:text-white">
                         {title}
