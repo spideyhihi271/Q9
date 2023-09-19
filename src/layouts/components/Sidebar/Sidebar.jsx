@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // Asset
 import config from '../../../configs';
-import './Sidebar.scss';
+import * as userService from '../../../services/userService';
 
 function Sidebar({ miniSize, setMiniSize }) {
     // Default
@@ -12,11 +13,6 @@ function Sidebar({ miniSize, setMiniSize }) {
             link: config.routes.home,
             icon: <i className="fa-light fa-grid-2"></i>,
             title: 'Trang chủ',
-        },
-        {
-            link: '/',
-            icon: <i className="fa-light fa-compass"></i>,
-            title: 'Khám phá',
         },
         {
             link: config.routes.library,
@@ -29,52 +25,37 @@ function Sidebar({ miniSize, setMiniSize }) {
             title: 'Nâng cấp',
         },
         {
-            link: '/',
-            icon: <i className="fa-light fa-tv-music"></i>,
-            title: 'Chủ đề và Thể loại',
-        },
-        {
             link: config.routes.history,
             icon: <i className="fa-light fa-clock-rotate-left"></i>,
             title: 'Nghe gần đây',
         },
-        {
-            link: '/',
-            icon: <i className="fa-sharp fa-light fa-heart"></i>,
-            title: 'Bài hát yêu thích',
-        },
-        {
-            link: '/',
-            icon: <i className="fa-light fa-arrow-up-from-bracket"></i>,
-            title: 'Đã tải lên',
-        },
     ];
 
     // State
-    const [darkMode, setDarkMode] = useState(false);
+    const url = useLocation().pathname;
+    const loginState = useSelector((state) => state.auth.login);
+    const [playlists, setPlaylists] = useState([]);
+    const [fetching, setFetching] = useState(true);
 
-    // Hooks
     useEffect(() => {
-        handelDarkMode(darkMode);
-    }, [darkMode]);
+        setMiniSize(false);
+    }, [url]);
 
-    //Handel
-    const handelDarkMode = (value) => {
-        let documentPage = document.documentElement;
-        if (value) {
-            documentPage.classList.remove('light');
-            documentPage.classList.add('dark');
-        } else {
-            documentPage.classList.remove('dark');
-            documentPage.classList.add('light');
-        }
-    };
+    useEffect(() => {
+        const getData = async () => {
+            setFetching(true);
+            let data = await userService.getMyPlaylist();
+            setPlaylists(data);
+            setFetching(false);
+        };
+        if (loginState.user) getData();
+    }, [loginState.user]);
 
     // Render
     return (
         <>
             <aside
-                className={`fixed z-[9999] lg:relative h-screen overflow-y-auto border-r-[1px] dark:border-0 bg-white dark:bg-[#0c021c] transition-all
+                className={`fixed z-30 lg:relative h-screen overflow-y-auto border-r-[1px] dark:border-0 bg-white dark:bg-[#0c021c] transition-all
                     ${
                         miniSize
                             ? 'translate-x-0 w-60 lg:w-16'
@@ -115,7 +96,7 @@ function Sidebar({ miniSize, setMiniSize }) {
                     <p className="mx-4 text-sm font-normal text-gray-400">
                         MENU
                     </p>
-                    {navList.slice(0, navList.length / 2).map((nav, idx) => (
+                    {navList.map((nav, idx) => (
                         <Link
                             key={idx}
                             to={nav.link}
@@ -139,59 +120,39 @@ function Sidebar({ miniSize, setMiniSize }) {
                             </p>
                         </Link>
                     ))}
-                </nav>
-                <p className="mx-4 text-sm font-normal text-gray-400">KHÁC</p>
-                <main className="h-1/2 overflow-y-auto">
-                    {navList
-                        .slice(navList.length / 2, navList.length)
-                        .map((nav, idx) => (
-                            <Link
-                                key={idx}
-                                to={nav.link}
-                                className={`mx-2 p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight dark:hover:bg-hoverDark ${
-                                    miniSize ? 'lg: px-0 lg:justify-center' : ''
-                                }`}
-                            >
-                                <span
-                                    className={`w-8 text-xl ${
-                                        miniSize ? 'text-center' : ''
-                                    } `}
-                                >
-                                    {nav.icon}
-                                </span>
-                                <p
-                                    className={`text-sm ${
-                                        miniSize ? 'mx-2 lg:mx-0 lg:hidden' : ''
-                                    }`}
-                                >
-                                    {nav.title}
-                                </p>
-                            </Link>
-                        ))}
+
                     {!miniSize && (
                         <>
-                            {navList.slice(0, 3).map((nav, idx) => (
-                                <Link
-                                    key={idx}
-                                    to={nav.link}
-                                    className="mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight  dark:hover:bg-hoverDark"
-                                >
-                                    <span className="w-8 text-xl">
-                                        <i className="fa-light fa-folder-music"></i>
-                                    </span>
-                                    <p className="text-sm ">Tên Playlist</p>
-                                </Link>
-                            ))}
+                            {loginState.user && (
+                                <>
+                                    {fetching && (
+                                        <>
+                                            {playlists.map((playlist, idx) => (
+                                                <Link
+                                                    key={idx}
+                                                    to={
+                                                        config.routes.playList +
+                                                        '/' +
+                                                        playlist._id
+                                                    }
+                                                    className="mx-2  p-2 flex items-center h-12 rounded-lg dark:text-white hover:bg-hoverLight  dark:hover:bg-hoverDark"
+                                                >
+                                                    <span className="w-8 text-xl">
+                                                        <i className="fa-light fa-folder-music"></i>
+                                                    </span>
+                                                    <p className="flex-1 text-sm line-clamp-1">
+                                                        {playlist.name}
+                                                    </p>
+                                                </Link>
+                                            ))}
+                                        </>
+                                    )}
+                                </>
+                            )}
                         </>
                     )}
-                </main>
+                </nav>
             </aside>
-            <button
-                className="fixed bottom-[50px] right-[50px] z-[9999] w-10 h-10 dark:text-white border rounded-full text-sm"
-                onClick={() => setDarkMode(!darkMode)}
-            >
-                Dark
-            </button>
         </>
     );
 }

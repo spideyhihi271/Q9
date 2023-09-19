@@ -1,21 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import * as SearchServices from '../services/searchService';
+import SearchBox from '../layouts/components/Search';
 import ListGrid from '../components/ListGrid';
+import Loader from '../components/Loader';
 
 function Search() {
-    // Default
-    const renderTest = [0, 1, 2, 3];
+    const keyword = useParams().keyword;
+    const [songs, setSongs] = useState([]);
+    const [playlists, setPlaylist] = useState([]);
+    const [artists, setArtists] = useState([]);
+    const [fetching, setFetching] = useState(false);
 
+    useEffect(() => {
+        const getData = async () => {
+            setFetching(true);
+            const res = await SearchServices.searchByKeyword(
+                keyword.toLocaleLowerCase(),
+            );
+            setSongs(res[0]);
+            setPlaylist(res[1]);
+            setArtists(res[2]);
+            setFetching(false);
+        };
+        if (keyword.length > 0) {
+            getData();
+        }
+    }, [keyword]);
     return (
         <div className="lg:w-[70%]">
-            <ListGrid title="Bài hát" data={renderTest} />
-            <ListGrid title="Video" data={renderTest} item={1} />
-            <ListGrid title="Đĩa nhạc" data={renderTest} item={1} />
-            <ListGrid
-                title="Danh sách phát của cộng đồng"
-                data={renderTest}
-                item={1}
-            />
-            <ListGrid title="Nghệ sĩ" data={renderTest} item={2} />
+            <div className="lg:hidden mb-5">
+                <SearchBox />
+            </div>
+            {fetching ? (
+                <Loader />
+            ) : (
+                <>
+                    <ListGrid title="Bài hát" data={songs} />
+                    <ListGrid
+                        title="Đĩa nhạc"
+                        data={playlists}
+                        item={1}
+                        fullDefault
+                    />
+                    <ListGrid
+                        title="Nghệ sĩ"
+                        data={artists}
+                        item={2}
+                        fullDefault
+                    />
+                </>
+            )}
         </div>
     );
 }

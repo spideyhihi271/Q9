@@ -22,7 +22,7 @@ function Submenu({
                             <button
                                 key={idx}
                                 className="px-2 flex items-center w-full h-12 dark:text-white hover:bg-hoverLight dark:hover:bg-hoverDark"
-                                onClick={() => console.log('Test Clicked!')}
+                                onClick={() => item.handle()}
                             >
                                 <span className="w-8">{item.icon}</span>
                                 <span className="mx-1 flex-1 text-sm text-left">
