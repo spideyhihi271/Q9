@@ -37,7 +37,6 @@ function Search() {
         if (item) {
             navigate(config.routes.search + '/' + item.name);
         } else {
-            console.log(keyword);
             navigate(config.routes.search + '/' + keyword);
         }
         setShowResult(false);
@@ -69,7 +68,7 @@ function Search() {
                 </div>
             )}
         >
-            <div className="flex w-96 h-10 border dark:border-transparent rounded-lg dark:bg-gray-900">
+            <div className="flex w-full lg:w-96 h-10 border dark:border-transparent rounded-lg dark:bg-gray-900">
                 <button
                     className="h-full w-10 dark:text-white"
                     onClick={() => handelSearch()}

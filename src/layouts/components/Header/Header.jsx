@@ -94,7 +94,7 @@ function Header({ activeSidebar, setActiveSidebar }) {
             </div>
             <nav className="flex items-center">
                 <Link
-                    to={config.routes.search}
+                    to={config.routes.search + '/new'}
                     className="lg:hidden flex items-center justify-center ml-2 lg:ml-4 h-9 w-9 lg:h-10 lg:w-10 border rounded-full dark:bg-hoverDark dark:border-0 dark:text-white"
                 >
                     <i className="fa-light fa-magnifying-glass"></i>

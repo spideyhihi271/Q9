@@ -30,26 +30,34 @@ function Search() {
     }, [keyword]);
     return (
         <div className="lg:w-[70%]">
-            <div className="lg:hidden mb-5">
+            <div className="w-full lg:hidden mb-5">
                 <SearchBox />
             </div>
             {fetching ? (
                 <Loader />
             ) : (
                 <>
-                    <ListGrid title="Bài hát" data={songs} />
-                    <ListGrid
-                        title="Đĩa nhạc"
-                        data={playlists}
-                        item={1}
-                        fullDefault
-                    />
-                    <ListGrid
-                        title="Nghệ sĩ"
-                        data={artists}
-                        item={2}
-                        fullDefault
-                    />
+                    {[...songs, ...playlists, ...artists].length === 0 ? (
+                        <h1 className="my-10 text-center lg:text-left">
+                            Không tìm thấy nội dung phù hợp
+                        </h1>
+                    ) : (
+                        <>
+                            <ListGrid title="Bài hát" data={songs} />
+                            <ListGrid
+                                title="Đĩa nhạc"
+                                data={playlists}
+                                item={1}
+                                fullDefault
+                            />
+                            <ListGrid
+                                title="Nghệ sĩ"
+                                data={artists}
+                                item={2}
+                                fullDefault
+                            />
+                        </>
+                    )}
                 </>
             )}
         </div>
