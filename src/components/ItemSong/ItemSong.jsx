@@ -17,6 +17,7 @@ import {
 import checkLogger from '../../utils/checkLogger';
 
 import SubMenu from '../SubMenu';
+import { formatHoursMinus, formatTimeSong } from '../../utils/formatUnit';
 
 function ItemSong({
     data,
@@ -183,7 +184,7 @@ function ItemSong({
                         ))}
                     </div>
                     <p className="flex-1 text-center text-sm text-gray-500">
-                        3:30
+                        {formatTimeSong(item.duration)}
                     </p>
                     <SubMenu
                         data={actions}

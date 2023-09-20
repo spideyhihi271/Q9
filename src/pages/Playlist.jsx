@@ -8,21 +8,17 @@ import * as SongService from '../services/songService';
 import { formatDate, formatHoursMinus } from '../utils/formatUnit';
 
 import ItemSong from '../components/ItemSong';
+import Loader from '../components/Loader';
 import Submenu from '../components/SubMenu';
-import {
-    playerClear,
-    playerSetPlaylist,
-    playerSetSong,
-} from '../redux/playerSlice';
+import config from '../configs';
+import { loginSuccess } from '../redux/authSlice';
 import {
     modelSetChildren,
     modelSetOpen,
     modelSetParams,
 } from '../redux/modalSlice';
-import config from '../configs';
-import { loginSuccess } from '../redux/authSlice';
+import { playerSetPlaylist, playerSetSong } from '../redux/playerSlice';
 import checkLogger from '../utils/checkLogger';
-import Loader from '../components/Loader';
 
 function Playlist() {
     // Default
@@ -109,38 +105,45 @@ function Playlist() {
 
     // Handle
     const toogleSong = async (item) => {
-        const data = await PlaylistService.putNewSongByID(idPlaylist, item._id);
-        if (data) {
-            // Update Playlist
-            let playlistCopy = { ...playlist };
-            let index = playlistCopy.songs.findIndex(
-                (song) => song._id == item._id,
+        if (checkLogger(userState, dispath) === true) {
+            const data = await PlaylistService.putNewSongByID(
+                idPlaylist,
+                item._id,
             );
-            let newArray = [...playlistCopy.songs];
-            if (index === -1) {
-                newArray.push(item);
-            } else {
-                newArray = newArray.filter((song) => song._id != item._id);
+            if (data) {
+                // Update Playlist
+                let playlistCopy = { ...playlist };
+                let index = playlistCopy.songs.findIndex(
+                    (song) => song._id == item._id,
+                );
+                let newArray = [...playlistCopy.songs];
+                if (index === -1) {
+                    newArray.push(item);
+                } else {
+                    newArray = newArray.filter((song) => song._id != item._id);
+                }
+                const total = playlistCopy.songs.reduce(
+                    (sum, item) => sum + item.duration,
+                    0,
+                );
+                playlistCopy.songs = newArray;
+                setTotalTime(total);
+                setPlaylist(playlistCopy);
+                // Update Recomemed
+                let recomemedCopy = [...recommend];
+                index = recomemedCopy.findIndex((song) => song._id == item._id);
+                if (index > -1) recomemedCopy.splice(index, 1);
+                setRecommend(recomemedCopy);
             }
-            const total = playlistCopy.songs.reduce(
-                (sum, item) => sum + item.duration,
-                0,
-            );
-            playlistCopy.songs = newArray;
-            setTotalTime(total);
-            setPlaylist(playlistCopy);
-            // Update Recomemed
-            let recomemedCopy = [...recommend];
-            index = recomemedCopy.findIndex((song) => song._id == item._id);
-            if (index > -1) recomemedCopy.splice(index, 1);
-            setRecommend(recomemedCopy);
         }
     };
 
     const handelEditPlaylist = () => {
-        dispath(modelSetChildren(2));
-        dispath(modelSetParams(playlist));
-        dispath(modelSetOpen(true));
+        if (checkLogger(userState, dispath) === true) {
+            dispath(modelSetChildren(2));
+            dispath(modelSetParams(playlist));
+            dispath(modelSetOpen(true));
+        }
     };
 
     const handelSaveOnFavorite = async () => {
@@ -330,13 +333,25 @@ function Playlist() {
                             ) : (
                                 <div className="grid grid-cols-1">
                                     {playlist.songs.map((item, idx) => (
-                                        <ItemSong
-                                            key={idx}
-                                            item={item}
-                                            vertical
-                                            removeToPlaylist
-                                            handleRemoveToPlaylist={toogleSong}
-                                        />
+                                        <>
+                                            {isOwner ? (
+                                                <ItemSong
+                                                    key={idx}
+                                                    item={item}
+                                                    vertical
+                                                    removeToPlaylist
+                                                    handleRemoveToPlaylist={
+                                                        toogleSong
+                                                    }
+                                                />
+                                            ) : (
+                                                <ItemSong
+                                                    key={idx}
+                                                    item={item}
+                                                    vertical
+                                                />
+                                            )}
+                                        </>
                                     ))}
                                 </div>
                             )}
@@ -348,13 +363,23 @@ function Playlist() {
                             </h3>
                             <div className="grid grid-cols-1">
                                 {recommend.map((item, idx) => (
-                                    <ItemSong
-                                        key={idx}
-                                        item={item}
-                                        vertical
-                                        addToPlaylist
-                                        handleAddToPlaylist={toogleSong}
-                                    />
+                                    <>
+                                        {isOwner ? (
+                                            <ItemSong
+                                                key={idx}
+                                                item={item}
+                                                vertical
+                                                addToPlaylist
+                                                handleAddToPlaylist={toogleSong}
+                                            />
+                                        ) : (
+                                            <ItemSong
+                                                key={idx}
+                                                item={item}
+                                                vertical
+                                            />
+                                        )}
+                                    </>
                                 ))}
                             </div>
                         </div>
