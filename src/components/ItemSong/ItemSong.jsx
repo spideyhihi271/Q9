@@ -16,8 +16,8 @@ import {
 } from '../../redux/playerSlice';
 import checkLogger from '../../utils/checkLogger';
 
+import { formatTimeSong } from '../../utils/formatUnit';
 import SubMenu from '../SubMenu';
-import { formatHoursMinus, formatTimeSong } from '../../utils/formatUnit';
 
 function ItemSong({
     data,
@@ -114,14 +114,9 @@ function ItemSong({
                     </div>
                     <footer className="my-2">
                         <div className="flex items-center justify-between">
-                            <Link
-                                to={`${config.routes.watch}/${item._id}${
-                                    fromPlaylist ? '/playlist' : ''
-                                }`}
-                                className="font-semibold dark:text-white line-clamp-1 lg:line-clamp-2"
-                            >
+                            <p className="font-semibold dark:text-white line-clamp-1 lg:line-clamp-2">
                                 {item.name}
-                            </Link>
+                            </p>
                             <SubMenu
                                 data={actions}
                                 visible={activeAction}

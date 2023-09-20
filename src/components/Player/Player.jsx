@@ -56,6 +56,11 @@ function Player() {
         }
     }, [playerState.song?._id]);
 
+    useEffect(() => {
+        const updateSong = async () =>
+            await SongServices.getByID(playerState.song?._id);
+        updateSong();
+    }, [playerState.song?._id]);
     // Handel
     const handelChangeProcess = async () => {
         if (videoRef.current) {
